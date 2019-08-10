@@ -47,8 +47,9 @@ class ReservationDAO @javax.inject.Inject()(
     }
 
   /**
-   * 予約を更新
-   */
+    * NOTE: sample
+    * 予約を更新
+    */
   def updateDuration(id: Long, startDate: LocalDate, endDate: LocalDate)(implicit ex: ExecutionContext):  Unit  = {
     db.run {
       for {
@@ -62,6 +63,7 @@ class ReservationDAO @javax.inject.Inject()(
   }
 
   /**
+    * NOTE: sample
     * 新しく予約を追加する
     */
   def create(data: Reservation): Future[Id] = {
