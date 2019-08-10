@@ -40,7 +40,7 @@ class ReservationDAO @javax.inject.Inject()(
   /**
    * 予約を更新
    */ 
-  def update(id: Long, startDate:String,endDate:String):  Unit  = 
+  def update(id: Long, startDate:LocalDate,endDate:LocalDate):  Unit  = 
     db.run {
       slick
         .filter(_.id === id)
@@ -48,7 +48,7 @@ class ReservationDAO @javax.inject.Inject()(
         .update((startDate, endDate))
     }
   
-  def create(facilityId: Facility.Id ,startDate: String, endDate: String, userId: Long,userType:Int): Unit = 
+  def create(facilityId: Facility.Id ,startDate: LocalDate, endDate: LocalDate, userId: Long,userType:Int): Unit = 
     db.run {
       slick
         .map(p => (p.facilityId, p.startDate, p.endDate, p.userId,p.userType)) += ((facilityId, startDate, endDate, userId, userType))

@@ -9,7 +9,7 @@ package persistence.reservation.model
 import play.api.data._
 import play.api.data.Forms._
 import java.time.LocalDateTime
-import jaca.time.LocalDate
+import java.time.LocalDate
 import persistence.facility.model.Facility
 
 
