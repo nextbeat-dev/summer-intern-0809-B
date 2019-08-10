@@ -1,0 +1,29 @@
+@*
+ * This file is part of the Nextbeat services.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ *@
+@import model.component.util.ViewValuePageLayout
+@import persistence.facility.model.Facility
+@import play.api.i18n.Messages
+@import views.html.common.component.image.ResponsiveImage
+
+@** 施設一覧/検索 *@
+@(vv: model.component.util.ViewValuePageLayout, facility: persistence.facility.model.Facility)(implicit messages: play.api.i18n.Messages)
+@views.html.common.layout.Default(vv) {
+  @views.html.common.layout.ContentLayout(
+    id      = "site-facility-show",
+    content = tplContent
+  )
+}
+
+@** @facility.idでアクセス *@
+@** テンプレート: コンテンツ *@
+@tplContent = {
+  @views.html.site.facility.show._01_title()
+  @views.html.site.facility.show._02_slide()
+  @views.html.site.facility.show._03_detail()
+  @views.html.site.facility.show._04_free()
+  @views.html.site.facility.show._05_access()
+}
