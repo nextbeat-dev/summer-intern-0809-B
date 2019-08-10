@@ -16,10 +16,18 @@ import persistence.geo.model.Location
 //~~~~~~~~~~~~~
 case class Facility(
   id:          Option[Facility.Id],                // 施設ID
-  locationId:  Location.Id,                        // 地域ID
   name:        String,                             // 施設名
-  address:     String,                             // 住所(詳細)
+  catchCopy:   String,                             // キャッチコピー
   description: String,                             // 施設説明
+  address:     String,                             // 住所(詳細) 
+  locationId:  Location.Id,                        // 地域ID
+  url:         String,                             // 公式サイトのURL
+  cost:        Int,                                // 一人当たりの金額
+  access:      String,                             //　~からN時間とか
+  capacity:    Int,                                // 最大収容人数
+  map:         String,                             // googleマップの埋め込み要素
+  imagePaths:  String,                             // 施設画像、","で分割して利用/今はMax4枚
+  contents:    String,                             // 追加のコンテンツ(HTML)
   updatedAt:   LocalDateTime = LocalDateTime.now,  // データ更新日
   createdAt:   LocalDateTime = LocalDateTime.now   // データ作成日
 )
