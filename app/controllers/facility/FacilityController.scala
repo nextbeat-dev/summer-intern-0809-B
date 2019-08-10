@@ -81,7 +81,7 @@ class FacilityController @javax.inject.Inject()(
               for {
                 // FIXME: regionMap()ではkeyがなくてnullになるケースが考慮できてなくてヌルポが発生する可能性があります。
                 // nullを考慮した実装に修正してください
-                locations   <- daoLocation.filterByIds(regionMap(Region(id)))
+                locations   <- daoLocation.filterByRegion(regionMap(Region(id)))
                 facilitySeq <- facilityDao.filterByLocationIds(locations.map(_.id))
               } yield facilitySeq
             case None     => facilityDao.findAll

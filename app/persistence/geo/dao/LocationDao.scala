@@ -49,6 +49,16 @@ class LocationDAO @javax.inject.Inject()(
         .result
     }
 
+
+  def filterByRegion(ids: Seq[Location.Id]): Future[Seq[Location]] = {
+   db.run {
+     slick
+       .filter(_.id inSet ids)
+       .filter(_.parent inSet ids)
+       .result
+   }
+  }
+
   /**
    * 都道府県IDより、地域情報を取得する
    */
