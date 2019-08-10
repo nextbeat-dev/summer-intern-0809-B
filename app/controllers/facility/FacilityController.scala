@@ -78,10 +78,14 @@ class FacilityController @javax.inject.Inject()(
           facilitySeq <- form.regionIdOpt match {
             case Some(id) =>
               val regionMap = Region.map.toMap[Region, Seq[Location.Id]]
+              
               for {             
                 locations   <- daoLocation.filterByRegion(regionMap(Region(id)))
                 facilitySeq <- facilityDao.filterByLocationIds(locations.map(_.id))
-              } yield facilitySeq
+              } yield {
+                print(facilitySeq)
+                facilitySeq
+              }
             case None     => facilityDao.findAll
           }
         } yield {
