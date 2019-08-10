@@ -34,7 +34,8 @@ case class Facility(
 
 // 施設検索
 case class FacilitySearch(
-  regionIdOpt: Option[Short]
+  regionIdOpt: Option[Short],
+  capacityOpt: Option[Short]
 )
 
 // コンパニオンオブジェクト
@@ -48,6 +49,7 @@ object Facility {
   val formForFacilitySearch = Form(
     mapping(
       "regionCode" -> optional(shortNumber),
+      "capacities" -> optional(shortNumber),
     )(FacilitySearch.apply)(FacilitySearch.unapply)
   )
 }

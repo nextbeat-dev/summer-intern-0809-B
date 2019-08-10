@@ -22,7 +22,7 @@
   <div class="content__section form">
     @helper.form(action = controllers.facility.routes.FacilityController.search) {
 
-      @** 都道府県 *@
+      @** 地方 *@
       <div class="form__section pref inline">
         @helper.select(
           field   = form("regionCode"),
@@ -32,7 +32,20 @@
           '_showConstraints -> false
         )
       </div>
-
+      @** 人数 *@
+      <div class="form__section pref inline">
+        @helper.select(
+          field   = form("capacities"),
+          options = vv.capacities.map(v => (v.toString,v.toString)),
+          '_label           -> "人数",
+          '_default         -> "未選択",
+          '_showConstraints -> false
+        )
+      </div>
+      <span >
+        <input type="radio" name="gender" value="male">男性
+        <input type="radio" name="gender" value="female">女性
+      </span>
       @** 登録ボタン *@
       <div class="form__section submit inline">
         <button class="button" type="submit">

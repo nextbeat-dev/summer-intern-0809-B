@@ -10,6 +10,7 @@ package controllers.facility
 import play.api.i18n.I18nSupport
 import play.api.mvc.{AbstractController, MessagesControllerComponents}
 import persistence.facility.dao.FacilityDAO
+import persistence.facility.model.Facility
 import persistence.facility.model.Facility.formForFacilitySearch
 import persistence.geo.model.Location
 import persistence.geo.dao.LocationDAO
@@ -17,6 +18,8 @@ import model.site.facility.SiteViewValueFacilityList
 import model.component.util.ViewValuePageLayout
 import mvc.action.AuthenticationAction
 import persistence.geo.model.Location.Region
+
+
 
 // 施設
 //~~~~~~~~~~~~~~~~~~~~~
@@ -26,6 +29,7 @@ class FacilityController @javax.inject.Inject()(
   cc: MessagesControllerComponents
 ) extends AbstractController(cc) with I18nSupport {
   implicit lazy val executionContext = defaultExecutionContext
+  val capacitySeq = Range(1,101).toList
 
   /**
    * 施設詳細ページサンプル
@@ -46,9 +50,12 @@ class FacilityController @javax.inject.Inject()(
     for {
       facilitySeq <- facilityDao.findAll
     } yield {
+      val capacitySeq = List(1,2,3)
       val vv = SiteViewValueFacilityList(
+        
         layout     = ViewValuePageLayout(id = request.uri),
         regions    = Region.map.map(_._1),
+        capacities = capacitySeq,
         facilities = facilitySeq
       )
       Ok(views.html.site.facility.list.Main(vv, formForFacilitySearch))
@@ -67,6 +74,7 @@ class FacilityController @javax.inject.Inject()(
           val vv = SiteViewValueFacilityList(
             layout     = ViewValuePageLayout(id = request.uri),
             regions    = Region.map.map(_._1),
+            capacities = capacitySeq,
             facilities = facilitySeq
           )
           BadRequest(views.html.site.facility.list.Main(vv, errors))
@@ -78,20 +86,32 @@ class FacilityController @javax.inject.Inject()(
           facilitySeq <- form.regionIdOpt match {
             case Some(id) =>
               val regionMap = Region.map.toMap[Region, Seq[Location.Id]]
-              
               for {             
                 locations   <- daoLocation.filterByRegion(regionMap(Region(id)))
                 facilitySeq <- facilityDao.filterByLocationIds(locations.map(_.id))
               } yield {
-                print(facilitySeq)
-                facilitySeq
+                println(form.capacityOpt)
+                println(facilitySeq)
+                form.capacityOpt match {
+                  case Some(capacity) => facilitySeq.filter(_.capacity > capacity)
+                  case None => facilitySeq
+                }
               }
-            case None     => facilityDao.findAll
+            case None => 
+            for {
+              facilitySeq <- facilityDao.findAll
+            } yield {
+                form.capacityOpt match {
+                  case Some(capacity) => facilitySeq.filter(_.capacity > capacity)
+                  case None => facilitySeq
+              }
+            }
           }
         } yield {
           val vv = SiteViewValueFacilityList(
             layout     = ViewValuePageLayout(id = request.uri),
             regions    = Region.map.map(_._1),
+            capacities = capacitySeq,
             facilities = facilitySeq
           )
           Ok(views.html.site.facility.list.Main(vv, formForFacilitySearch.fill(form)))
