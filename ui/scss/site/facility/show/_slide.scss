@@ -1,0 +1,55 @@
+#site-facility-show-slide {
+  .content {
+    &.full-width {
+      margin: 10px 0;
+    }
+  }
+
+  .main-image {
+    width: 400vw;
+    position: relative;
+    animation-name: slide;
+    animation-duration: 30s;
+    animation-iteration-count: infinite;
+
+    &__wrapper{
+      width: 100vw;
+      overflow: hidden;
+    }
+
+    &__content {
+      width: 100vw;
+      float: left;
+    }
+  }
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-100vw);
+  }
+  45% {
+    transform: translateX(-100vw)
+  }
+  50% {
+    transform: translateX(-200vw);
+  }
+  70% {
+    transform: translateX(-200vw)
+  }
+  75% {
+    transform: translateX(-300vw);
+  }
+  95% {
+    transform: translateX(-300vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

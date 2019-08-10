@@ -1,0 +1,37 @@
+#site-facility-show-title {
+  .content {
+    margin: 10px auto;
+    width: 1024px;
+  }
+
+  .title {
+    font-size: 3em;
+  }
+}
+
+.tag {
+  padding: 3px 6px;
+  margin-right: 6px;
+  margin-left: 1px;
+  color: white;
+  background-color: black;
+  border-radius: 6px;
+  box-shadow: 0 0 3px #ddd;
+  white-space: nowrap;
+
+  &.big{
+    font-size: 1.2rem;
+    padding: 3.5px 7px;
+    margin-left: 6px;
+    background-color: darkcyan;
+  }
+
+  &-content {
+    margin-right: 12px;
+    margin-left: 1px;
+  }
+
+  &__wrapper {
+    margin-top: 20px;
+  }
+}
