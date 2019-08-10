@@ -55,7 +55,44 @@ class FacilityController @javax.inject.Inject()(
       Ok(views.html.site.facility.list.Main(vv, formForFacilitySearch))
     }
   }
-
+  // def region(region:String) = Action.async { implicit request => {
+  //     if (region == "IS_PREF_KANTO"){
+  //       val locSeq = daoLocation.filterByIds(Location.Region.IS_PREF_KANTO)
+  //       print(locSeq)
+  //     } else if (region == "IS_PREF_KINKI") {
+  //       val locSeq = daoLocation.filterByIds(Location.Region.IS_PREF_KINKI)
+  //     } else if (region == "IS_PREF_TOKAI") {
+  //       val locSeq = daoLocation.filterByIds(Location.Region.IS_PREF_KINKI)
+  //     } else if (region == "IS_PREF_TOHOKU") {
+  //       val locSeq = daoLocation.filterByIds(Location.Region.IS_PREF_KINKI)
+  //     } else if (region == "IS_PREF_CHUBU") {
+  //       val locSeq = daoLocation.filterByIds(Location.Region.IS_PREF_KINKI)
+  //     } else if (region == "IS_PREF_CHUGOKU") {
+  //       val locSeq = daoLocation.filterByIds(Location.Region.IS_PREF_KINKI)
+  //     } else if (region == "IS_PREF_SHIKOKU") {
+  //       val locSeq = daoLocation.filterByIds(Location.Region.IS_PREF_KINKI)
+  //     } else if (region == "IS_PREF_KYUSHU") {
+  //       val locSeq = daoLocation.filterByIds(Location.Region.IS_PREF_KINKI)
+  //     } else {
+  //       val locSeq = None
+  //     }
+  //   } 
+  // }
+  def region(region:String) = Action.async { implicit request => {
+    for {
+      locSeq      <- daoLocation.filterByIds(Location.Region.IS_PREF_KINKI)
+      facilitySeq <- facilityDao.findAll
+    } yield {
+      val vv = SiteViewValueFacilityList(
+        layout     = ViewValuePageLayout(id = request.uri),
+        location   = locSeq,
+        facilities = facilitySeq
+      )
+      print(locSeq)
+      Ok("region")
+    }
+  }
+  }
   /**
    * 施設検索
    */

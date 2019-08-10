@@ -60,6 +60,17 @@ class LocationDAO @javax.inject.Inject()(
         .result
     }
   }
+  def filterByPrefId(region:String): Future[Seq[Location]] = {
+    
+    
+    val prefCode = Some(id).filter(Location.Region.IS_PREF_KINKI.contains(_)).map(_.take(2))
+    db.run {
+      slick
+        .filter(_.id.take(2) === prefCode)
+        .result
+    }
+  }
+
 
   // --[ テーブル定義 ] --------------------------------------------------------
   class LocationTable(tag: Tag) extends Table[Location](tag, "geo_location") {
