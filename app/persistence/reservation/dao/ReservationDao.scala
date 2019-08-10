@@ -7,12 +7,14 @@
 package persistence.reservation.dao
 
 import java.time.LocalDateTime
+import java.time.LocalDate
 import scala.concurrent.Future
 
 import slick.jdbc.JdbcProfile
 import play.api.db.slick.DatabaseConfigProvider
 import play.api.db.slick.HasDatabaseConfigProvider
 import persistence.reservation.model.Reservation
+
 import persistence.facility.model.Facility
 
 // DAO: 予約情報
@@ -75,11 +77,11 @@ class ReservationDAO @javax.inject.Inject()(
 
     // Table's columns
     /* @1 */ def id            = column[Reservation.Id]    ("id", O.PrimaryKey, O.AutoInc)
-    /* @2 */ def facilityId    = column[Facility.Id]    ("facility_id")
-    /* @3 */ def startDate          = column[String]         ("start_date")
-    /* @4 */ def endDate       = column[String]         ("end_date")
-    /* @5 */ def userId   = column[Long]         ("user_id")
-    /* @6 */ def userType   = column[Int]         ("user_type")
+    /* @2 */ def facilityId    = column[Facility.Id]       ("facility_id")
+    /* @3 */ def startDate     = column[LocalDate]         ("start_date")
+    /* @4 */ def endDate       = column[LocalDate]         ("end_date")
+    /* @5 */ def userId        = column[Long]         ("user_id")
+    /* @6 */ def userType      = column[Int]         ("user_type")
     /* @7 */ def updatedAt     = column[LocalDateTime]  ("updated_at")
     /* @8 */ def createdAt     = column[LocalDateTime]  ("created_at")
 

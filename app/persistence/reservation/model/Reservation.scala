@@ -9,6 +9,7 @@ package persistence.reservation.model
 import play.api.data._
 import play.api.data.Forms._
 import java.time.LocalDateTime
+import jaca.time.LocalDate
 import persistence.facility.model.Facility
 
 
@@ -16,8 +17,8 @@ import persistence.facility.model.Facility
 case class Reservation(
   id:          Option[Reservation.Id],                // 予約ID
   facilityId: Facility.Id,                        // 施設ID
-  startDate: String, //チェックイン   
-  Date: String, //チェックアウト                  
+  startDate: LocalDate, //チェックイン   
+  endDate: LocalDate, //チェックアウト                  
   userId: Long,          // 予約者のID
   userType: Int, // 予約者が施設所有者かお客様か
   updatedAt:   LocalDateTime = LocalDateTime.now,  // データ更新日
