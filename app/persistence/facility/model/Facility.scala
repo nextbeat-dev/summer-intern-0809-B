@@ -48,8 +48,10 @@ object Facility {
   // --[ フォーム定義 ]---------------------------------------------------------
   val formForFacilitySearch = Form(
     mapping(
-      "regionCode" -> optional(shortNumber),
-      "capacities" -> optional(shortNumber),
+      "regionCode" -> optional(shortNumber)
+        .verifying("regionCode is invalid.", value => if (value.isDefined) (value.get >= 1 && value.get <= 8 ) else true),
+      "capacities" -> optional(shortNumber)
+        .verifying("capacity is invalid.", value=> if (value.isDefined) (value.get >= 1 && value.get <= 100) else true),
     )(FacilitySearch.apply)(FacilitySearch.unapply)
   )
 }
