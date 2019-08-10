@@ -31,6 +31,13 @@ case class ReservationSearch(
   facilityIdOpt : Option[Facility.Id]
 )
 
+case class ReservationAdd(
+  name:            String,
+  address:         String,
+  company_name:    String
+)
+
+
 // コンパニオンオブジェクト
 //~~~~~~~~~~~~~~~~~~~~~~~~~~
 object Reservation {
@@ -43,5 +50,13 @@ object Reservation {
     mapping(
       "facilityIdOpt" -> optional(longNumber),
     )(ReservationSearch.apply)(ReservationSearch.unapply)
+  )
+
+   val formForReservationAdd = Form(
+    mapping(
+      "name" -> text,
+      "address" -> text,
+      "company_name"  -> text,
+    )(ReservationAdd.apply)(ReservationAdd.unapply)
   )
 }
