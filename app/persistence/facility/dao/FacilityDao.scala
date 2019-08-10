@@ -36,7 +36,7 @@ class FacilityDAO @javax.inject.Inject()(
         .filter(_.id === id)
         .result.headOption
     }
-
+  
   /**
    * 施設を全件取得する
    */
@@ -44,7 +44,6 @@ class FacilityDAO @javax.inject.Inject()(
     db.run {
       slick.result
     }
-
   /**
    * 地域から施設を取得
    * 検索業件: ロケーションID
@@ -61,24 +60,33 @@ class FacilityDAO @javax.inject.Inject()(
 
 
     // Table's columns
-    /* @1 */ def id            = column[Facility.Id]    ("id", O.PrimaryKey, O.AutoInc)
-    /* @2 */ def locationId    = column[Location.Id]    ("location_id")
-    /* @3 */ def name          = column[String]         ("name")
-    /* @4 */ def address       = column[String]         ("address")
-    /* @5 */ def description   = column[String]         ("description")
-    /* @6 */ def updatedAt     = column[LocalDateTime]  ("updated_at")
-    /* @7 */ def createdAt     = column[LocalDateTime]  ("created_at")
+    /* @1  */ def id            = column[Facility.Id]    ("id", O.PrimaryKey, O.AutoInc)
+    /* @2  */ def name          = column[String]         ("name")
+    /* @3  */ def catchCopy     = column[String]         ("catch_copy")
+    /* @4  */ def description   = column[String]         ("description")
+    /* @5  */ def address       = column[String]         ("address")
+    /* @6  */ def locationId    = column[Location.Id]    ("location_id")
+    /* @7  */ def url           = column[String]         ("url")
+    /* @8  */ def cost          = column[Int]            ("cost")
+    /* @9  */ def access        = column[String]         ("access")  
+    /* @10 */ def capacity      = column[Int]            ("capacity")
+    /* @11 */ def map           = column[String]         ("map")
+    /* @12 */ def imagePaths    = column[String]         ("image_paths")
+    /* @13 */ def contents      = column[String]         ("contents")
+    /* @14 */ def updatedAt     = column[LocalDateTime]  ("updated_at")
+    /* @15 */ def createdAt     = column[LocalDateTime]  ("created_at")
 
     // The * projection of the table
     def * = (
-      id.?, locationId, name, address, description,
+      id.?, name, catchCopy, description, address, locationId, 
+      url, cost, access, capacity, map, imagePaths, contents, 
       updatedAt, createdAt
     ) <> (
       /** The bidirectional mappings : Tuple(table) => Model */
       (Facility.apply _).tupled,
       /** The bidirectional mappings : Model => Tuple(table) */
       (v: TableElementType) => Facility.unapply(v).map(_.copy(
-        _6 = LocalDateTime.now
+        _14 = LocalDateTime.now
       ))
     )
   }
