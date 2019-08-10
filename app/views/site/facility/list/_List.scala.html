@@ -12,7 +12,7 @@
 @(vv: SiteViewValueFacilityList, form: Form[FacilitySearch])(implicit messages: play.api.i18n.Messages)
 
 @** 施設検索一覧 *@
-@views.html.common.layout.InnerContent("site-app-new-user-form", "content") {
+@views.html.common.layout.InnerContent("site-app-facility-list-form", "content") {
   @** --[ 見出し ]---------------------------------------------------------- *@
   <h3 class="content__section header">
     <span class="header__title">施設一覧</span>
@@ -25,9 +25,9 @@
       @** 都道府県 *@
       <div class="form__section pref inline">
         @helper.select(
-          field   = form("locationId"),
-          options = vv.location.map(v => (v.id, v.namePref)),
-          '_label           -> "都道府県",
+          field   = form("regionCode"),
+          options = vv.regions.map(v => (v.code.toString, v.name)),
+          '_label           -> "地方",
           '_default         -> "未選択",
           '_showConstraints -> false
         )

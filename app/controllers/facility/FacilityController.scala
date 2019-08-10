@@ -16,7 +16,7 @@ import persistence.geo.dao.LocationDAO
 import model.site.facility.SiteViewValueFacilityList
 import model.component.util.ViewValuePageLayout
 import mvc.action.AuthenticationAction
-
+import persistence.geo.model.Location.Region
 
 // 施設
 //~~~~~~~~~~~~~~~~~~~~~
@@ -44,57 +44,17 @@ class FacilityController @javax.inject.Inject()(
     */
   def list = Action async { implicit request =>
     for {
-      locSeq      <- daoLocation.filterByIds(Location.Region.IS_PREF_ALL)
       facilitySeq <- facilityDao.findAll
     } yield {
       val vv = SiteViewValueFacilityList(
         layout     = ViewValuePageLayout(id = request.uri),
-        location   = locSeq,
+        regions    = Region.map.map(_._1),
         facilities = facilitySeq
       )
       Ok(views.html.site.facility.list.Main(vv, formForFacilitySearch))
     }
   }
-  // def region(region:String) = Action.async { implicit request => {
-  //     if (region == "IS_PREF_KANTO"){
-  //       val locSeq = daoLocation.filterByIds(Location.Region.IS_PREF_KANTO)
-  //       print(locSeq)
-  //     } else if (region == "IS_PREF_KINKI") {
-  //       val locSeq = daoLocation.filterByIds(Location.Region.IS_PREF_KINKI)
-  //     } else if (region == "IS_PREF_TOKAI") {
-  //       val locSeq = daoLocation.filterByIds(Location.Region.IS_PREF_KINKI)
-  //     } else if (region == "IS_PREF_TOHOKU") {
-  //       val locSeq = daoLocation.filterByIds(Location.Region.IS_PREF_KINKI)
-  //     } else if (region == "IS_PREF_CHUBU") {
-  //       val locSeq = daoLocation.filterByIds(Location.Region.IS_PREF_KINKI)
-  //     } else if (region == "IS_PREF_CHUGOKU") {
-  //       val locSeq = daoLocation.filterByIds(Location.Region.IS_PREF_KINKI)
-  //     } else if (region == "IS_PREF_SHIKOKU") {
-  //       val locSeq = daoLocation.filterByIds(Location.Region.IS_PREF_KINKI)
-  //     } else if (region == "IS_PREF_KYUSHU") {
-  //       val locSeq = daoLocation.filterByIds(Location.Region.IS_PREF_KINKI)
-  //     } else {
-  //       val locSeq = None
-  //     }
-  //   } 
-  // }
-  def region(region:String) = Action.async { implicit request => {
-    
-    
-    for {
-      locSeq      <- daoLocation.filterByRegion(region)
-      facilitySeq <- facilityDao.findAll
-    } yield {
-      val vv = SiteViewValueFacilityList(
-        layout     = ViewValuePageLayout(id = request.uri),
-        location   = locSeq,
-        facilities = facilitySeq
-      )
-      print(locSeq)
-      Ok("region")
-    }
-  }
-  }
+ 
   /**
    * 施設検索
    */
@@ -102,12 +62,11 @@ class FacilityController @javax.inject.Inject()(
     formForFacilitySearch.bindFromRequest.fold(
       errors => {
        for {
-          locSeq      <- daoLocation.filterByIds(Location.Region.IS_PREF_ALL)
           facilitySeq <- facilityDao.findAll
         } yield {
           val vv = SiteViewValueFacilityList(
             layout     = ViewValuePageLayout(id = request.uri),
-            location   = locSeq,
+            regions    = Region.map.map(_._1),
             facilities = facilitySeq
           )
           BadRequest(views.html.site.facility.list.Main(vv, errors))
@@ -116,10 +75,11 @@ class FacilityController @javax.inject.Inject()(
       form   => {
         for {
           locSeq      <- daoLocation.filterByIds(Location.Region.IS_PREF_ALL)
-          facilitySeq <- form.locationIdOpt match {
+          facilitySeq <- form.regionIdOpt match {
             case Some(id) =>
-              for {
-                locations   <- daoLocation.filterByPrefId(id)
+              val regionMap = Region.map.toMap[Region, Seq[Location.Id]]
+              for {             
+                locations   <- daoLocation.filterByRegion(regionMap(Region(id)))
                 facilitySeq <- facilityDao.filterByLocationIds(locations.map(_.id))
               } yield facilitySeq
             case None     => facilityDao.findAll
@@ -127,7 +87,7 @@ class FacilityController @javax.inject.Inject()(
         } yield {
           val vv = SiteViewValueFacilityList(
             layout     = ViewValuePageLayout(id = request.uri),
-            location   = locSeq,
+            regions    = Region.map.map(_._1),
             facilities = facilitySeq
           )
           Ok(views.html.site.facility.list.Main(vv, formForFacilitySearch.fill(form)))
