@@ -18,7 +18,7 @@ case class Reservation(
   facilityId: Facility.Id,                        // 施設ID
   startDate: String, //チェックイン   
   Date: String, //チェックアウト                  
-  userId: String,          // 予約者のID
+  userId: Long,          // 予約者のID
   userType: Int, // 予約者が施設所有者かお客様か
   updatedAt:   LocalDateTime = LocalDateTime.now,  // データ更新日
   createdAt:   LocalDateTime = LocalDateTime.now   // データ作成日

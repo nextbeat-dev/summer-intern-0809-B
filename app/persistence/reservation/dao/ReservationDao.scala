@@ -27,7 +27,7 @@ class ReservationDAO @javax.inject.Inject()(
 
   // --[ データ処理定義 ] ------------------------------------------------------
   /**
-   * 予定を取得
+   * 予約を取得
    */ 
   def get(id: Reservation.Id): Future[Option[Reservation]] =
     db.run {
@@ -35,6 +35,30 @@ class ReservationDAO @javax.inject.Inject()(
         .filter(_.id === id)
         .result.headOption
     }
+  /**
+   * 予約を更新
+   */ 
+  def update(id: Long, startDate:String,endDate:String):  Unit  = 
+    db.run {
+      slick
+        .filter(_.id === id)
+        .map(p => (p.startDate, p.endDate))
+        .update((startDate, endDate))
+    }
+  
+  def create(facilityId: Facility.Id ,startDate: String, endDate: String, userId: Long,userType:Int): Unit = 
+    db.run {
+      slick
+        .map(p => (p.facilityId, p.startDate, p.endDate, p.userId,p.userType)) += ((facilityId, startDate, endDate, userId, userType))
+    }
+
+  def delete(id: Long): Unit = 
+    db.run {
+      slick
+        .filter(_.id === id)
+        .delete
+    }
+
   /**
    * 施設IDから予定を取得
    */ 
@@ -54,7 +78,7 @@ class ReservationDAO @javax.inject.Inject()(
     /* @2 */ def facilityId    = column[Facility.Id]    ("facility_id")
     /* @3 */ def startDate          = column[String]         ("start_date")
     /* @4 */ def endDate       = column[String]         ("end_date")
-    /* @5 */ def userId   = column[String]         ("user_id")
+    /* @5 */ def userId   = column[Long]         ("user_id")
     /* @6 */ def userType   = column[Int]         ("user_type")
     /* @7 */ def updatedAt     = column[LocalDateTime]  ("updated_at")
     /* @8 */ def createdAt     = column[LocalDateTime]  ("created_at")
