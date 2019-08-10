@@ -60,13 +60,29 @@ class LocationDAO @javax.inject.Inject()(
         .result
     }
   }
-  def filterByPrefId(region:String): Future[Seq[Location]] = {
-    
-    
-    val prefCode = Some(id).filter(Location.Region.IS_PREF_KINKI.contains(_)).map(_.take(2))
+  def filterByRegion(parent:String): Future[Seq[Location]] =
+    var ids = None
+    if (parent inSet Location.Region.IS_PREF_KANTO){
+      ids = Location.Region.IS_PREF_KANTO
+    }
+    if (parent inSet Location.Region.IS_PREF_KANSAI){
+      ids = Location.Region.IS_PREF_KANTO
+    }
     db.run {
       slick
-        .filter(_.id.take(2) === prefCode)
+        .filter(_.id inSet ids)
+        .result
+    }
+  def filterByRegion(region:String): Future[Seq[Location]] = {    
+    val id = "39000"
+    val a = Location.Region.IS_PREF_KINKI
+    println("#################")
+    println(a)
+    val prefCode = Some(id).filter(Location.Region.IS_PREF_KINKI.contains(_)).map(_.take(2))
+    println(prefCode)
+    db.run {
+      slick
+        .filter(_.id.take(2) inSet ids)
         .result
     }
   }

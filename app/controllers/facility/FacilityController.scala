@@ -79,8 +79,10 @@ class FacilityController @javax.inject.Inject()(
   //   } 
   // }
   def region(region:String) = Action.async { implicit request => {
+    
+    
     for {
-      locSeq      <- daoLocation.filterByIds(Location.Region.IS_PREF_KINKI)
+      locSeq      <- daoLocation.filterByRegion(region)
       facilitySeq <- facilityDao.findAll
     } yield {
       val vv = SiteViewValueFacilityList(

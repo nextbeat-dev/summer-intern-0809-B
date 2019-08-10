@@ -30,7 +30,7 @@ class ReservationDAO @javax.inject.Inject()(
   // --[ データ処理定義 ] ------------------------------------------------------
   /**
    * 予約を取得
-   */ 
+   */
   def get(id: Reservation.Id): Future[Option[Reservation]] =
     db.run {
       slick
