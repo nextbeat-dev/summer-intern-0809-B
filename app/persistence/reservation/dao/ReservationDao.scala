@@ -53,7 +53,7 @@ class ReservationDAO @javax.inject.Inject()(
     /* @1 */ def id            = column[Reservation.Id]    ("id", O.PrimaryKey, O.AutoInc)
     /* @2 */ def facilityId    = column[Facility.Id]    ("facility_id")
     /* @3 */ def startDate          = column[String]         ("start_date")
-    /* @4 */ def lastDate       = column[String]         ("last_date")
+    /* @4 */ def endDate       = column[String]         ("end_date")
     /* @5 */ def userId   = column[String]         ("user_id")
     /* @6 */ def userType   = column[Int]         ("user_type")
     /* @7 */ def updatedAt     = column[LocalDateTime]  ("updated_at")
@@ -61,14 +61,14 @@ class ReservationDAO @javax.inject.Inject()(
 
     // The * projection of the table
     def * = (
-      id.?, facilityId, startDate, lastDate, userId,userType,
+      id.?, facilityId, startDate, endDate, userId,userType,
       updatedAt, createdAt
     ) <> (
       /** The bidirectional mappings : Tuple(table) => Model */
       (Reservation.apply _).tupled,
       /** The bidirectional mappings : Model => Tuple(table) */
       (v: TableElementType) => Reservation.unapply(v).map(_.copy(
-        _6 = LocalDateTime.now
+        _7 = LocalDateTime.now
       ))
     )
   }

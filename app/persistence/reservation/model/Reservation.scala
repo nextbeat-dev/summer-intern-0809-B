@@ -4,20 +4,22 @@
  * For the full copyright and license information,
  * please view the LICENSE file that was distributed with this source code.
  */
-package persistence.facility.model
+package persistence.reservation.model
 
 import play.api.data._
 import play.api.data.Forms._
 import java.time.LocalDateTime
-import persistence.geo.model.Facility
+import persistence.facility.model.Facility
+
 
 // 予約状況情報
 case class Reservation(
   id:          Option[Reservation.Id],                // 予約ID
-  facility_id: String,                        // 施設IDID
-  start_date: String, //チェックイン   
-  last_date: String, //チェックアウト                  
-  user_id: String,          // 予約者のID
+  facilityId: Facility.Id,                        // 施設ID
+  startDate: String, //チェックイン   
+  Date: String, //チェックアウト                  
+  userId: String,          // 予約者のID
+  userType: Int, // 予約者が施設所有者かお客様か
   updatedAt:   LocalDateTime = LocalDateTime.now,  // データ更新日
   createdAt:   LocalDateTime = LocalDateTime.now   // データ作成日
 )
@@ -25,7 +27,7 @@ case class Reservation(
 
 // 施設検索
 case class ReservationSearch(
-  locationIdOpt: Option[Facility.Id]
+  facilityIdOpt : Option[Facility.Id]
 )
 
 // コンパニオンオブジェクト
@@ -38,7 +40,7 @@ object Reservation {
   // --[ フォーム定義 ]---------------------------------------------------------
   val formForReservationSearch = Form(
     mapping(
-      "facilityId" -> optional(text),
+      "facilityIdOpt" -> optional(longNumber),
     )(ReservationSearch.apply)(ReservationSearch.unapply)
   )
 }
