@@ -448,11 +448,17 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     width: 650px; }
     #site-facility-list .content__section.content article .item-panel__wrapper {
-      padding: 16px;
-      width: 100%; }
+      padding: 16px; }
       #site-facility-list .content__section.content article .item-panel__wrapper .facility-item__header {
         font-weight: bold;
-        font-size: 1.14286rem; }
+        font-size: 1.14286rem;
+        border-bottom: 1px solid lightgray; }
+        #site-facility-list .content__section.content article .item-panel__wrapper .facility-item__header .thumbnail {
+          width: auto;
+          margin: -16px -16px 10px;
+          height: 200px;
+          background-size: cover;
+          border-radius: 4px 4px 0 0; }
       #site-facility-list .content__section.content article .item-panel__wrapper .facility-item__content {
         margin-top: 10px; }
         #site-facility-list .content__section.content article .item-panel__wrapper .facility-item__content label {

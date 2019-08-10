@@ -41,11 +41,19 @@
 
         .item-panel__wrapper {
           padding: 16px;
-          width:   100%;
 
           .facility-item__header {
             font-weight: bold;
             font-size:   $font-size-medium;
+            border-bottom: 1px solid lightgray;
+
+            .thumbnail{
+              width: auto;
+              margin: -16px -16px 10px;
+              height: 200px;
+              background-size: cover;
+              border-radius: 4px 4px 0 0;
+            }
           }
 
           .facility-item__content {
