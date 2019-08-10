@@ -30,9 +30,9 @@ class FacilityController @javax.inject.Inject()(
   /**
    * 施設詳細ページサンプル
    */
-  def show() = Action.async { implicit request =>
+  def show(id: Long) = Action.async { implicit request =>
     for {
-      facility <- facilityDao.get(1)
+      facility <- facilityDao.get(id)
     } yield {
       val vv = ViewValuePageLayout(id = request.uri)
       Ok(views.html.site.facility.show.Main(vv, facility.get))
