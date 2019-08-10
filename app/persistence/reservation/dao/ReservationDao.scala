@@ -8,14 +8,14 @@ package persistence.reservation.dao
 
 import java.time.LocalDateTime
 import java.time.LocalDate
-import scala.concurrent.Future
 
+import scala.concurrent.{ExecutionContext, Future}
 import slick.jdbc.JdbcProfile
 import play.api.db.slick.DatabaseConfigProvider
 import play.api.db.slick.HasDatabaseConfigProvider
 import persistence.reservation.model.Reservation
-
 import persistence.facility.model.Facility
+import persistence.reservation.model.Reservation.Id
 
 // DAO: 予約情報
 //~~~~~~~~~~~~~~~~~~
@@ -37,24 +37,53 @@ class ReservationDAO @javax.inject.Inject()(
         .filter(_.id === id)
         .result.headOption
     }
-  /**
-   * 予約を更新
-   */ 
-  def update(id: Long, startDate:LocalDate,endDate:LocalDate):  Unit  = 
+
+  def update(id: Long, startDate:LocalDate,endDate:LocalDate):  Unit  =
     db.run {
       slick
         .filter(_.id === id)
         .map(p => (p.startDate, p.endDate))
         .update((startDate, endDate))
     }
-  
-  def create(facilityId: Facility.Id ,startDate: LocalDate, endDate: LocalDate, userId: Long,userType:Int): Unit = 
+
+  /**
+    * NOTE: sample
+    * 予約を更新
+    */
+  def updateDuration(id: Long, startDate: LocalDate, endDate: LocalDate)(implicit ex: ExecutionContext):  Unit  = {
+    db.run {
+      for {
+        old <- slick.filter(_.id === id).result.headOption
+        _    = old match {
+          case Some(_) => slick.filter(_.id === id).map(p => (p.startDate, p.endDate)).update((startDate, endDate))
+          case None    => DBIO.successful(0)
+        }
+      } yield old
+    }
+  }
+
+  /**
+    * NOTE: sample
+    * 新しく予約を追加する
+    */
+  def create(data: Reservation): Future[Id] = {
+   db.run {
+     data.id match {
+       case None => slick returning slick.map(_.id) += data
+       case Some(_) => DBIO.failed(
+         new IllegalArgumentException("The given object is already assigned id.")
+       )
+     }
+   }
+  }
+
+  def create(facilityId: Facility.Id ,startDate: LocalDate, endDate: LocalDate, userId: Long,userType:Int): Unit =
     db.run {
       slick
         .map(p => (p.facilityId, p.startDate, p.endDate, p.userId,p.userType)) += ((facilityId, startDate, endDate, userId, userType))
     }
 
-  def delete(id: Long): Unit = 
+  def delete(id: Long): Unit =
     db.run {
       slick
         .filter(_.id === id)
@@ -63,7 +92,7 @@ class ReservationDAO @javax.inject.Inject()(
 
   /**
    * 施設IDから予定を取得
-   */ 
+   */
   def filterByFacilityIds(facilityIds: Seq[Facility.Id]): Future[Seq[Reservation]] =
     db.run {
       slick
@@ -76,12 +105,12 @@ class ReservationDAO @javax.inject.Inject()(
 
 
     // Table's columns
-    /* @1 */ def id            = column[Reservation.Id]    ("id", O.PrimaryKey, O.AutoInc)
-    /* @2 */ def facilityId    = column[Facility.Id]       ("facility_id")
-    /* @3 */ def startDate     = column[LocalDate]         ("start_date")
-    /* @4 */ def endDate       = column[LocalDate]         ("end_date")
-    /* @5 */ def userId        = column[Long]         ("user_id")
-    /* @6 */ def userType      = column[Int]         ("user_type")
+    /* @1 */ def id            = column[Reservation.Id] ("id", O.PrimaryKey, O.AutoInc)
+    /* @2 */ def facilityId    = column[Facility.Id]    ("facility_id")
+    /* @3 */ def startDate     = column[LocalDate]      ("start_date")
+    /* @4 */ def endDate       = column[LocalDate]      ("end_date")
+    /* @5 */ def userId        = column[Long]           ("user_id")
+    /* @6 */ def userType      = column[Int]            ("user_type")
     /* @7 */ def updatedAt     = column[LocalDateTime]  ("updated_at")
     /* @8 */ def createdAt     = column[LocalDateTime]  ("created_at")
 
