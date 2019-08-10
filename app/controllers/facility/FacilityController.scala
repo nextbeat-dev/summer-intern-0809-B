@@ -79,6 +79,8 @@ class FacilityController @javax.inject.Inject()(
             case Some(id) =>
               val regionMap = Region.map.toMap[Region, Seq[Location.Id]]
               for {
+                // FIXME: regionMap()ではkeyがなくてnullになるケースが考慮できてなくてヌルポが発生する可能性があります。
+                // nullを考慮した実装に修正してください
                 locations   <- daoLocation.filterByIds(regionMap(Region(id)))
                 facilitySeq <- facilityDao.filterByLocationIds(locations.map(_.id))
               } yield facilitySeq
