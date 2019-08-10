@@ -27,6 +27,18 @@ class FacilityController @javax.inject.Inject()(
   implicit lazy val executionContext = defaultExecutionContext
 
   /**
+   * 施設詳細ページサンプル
+   */
+  def show() = Action.async { implicit request =>
+    for {
+      facility <- facilityDao.get(1)
+    } yield {
+      val vv = ViewValuePageLayout(id = request.uri)
+      Ok(views.html.site.facility.show.Main(vv, facility.get))
+    }
+  }
+
+  /**
     * 施設一覧ページ
     */
   def list = Action.async { implicit request =>
