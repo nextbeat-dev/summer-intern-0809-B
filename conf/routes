@@ -16,6 +16,7 @@ GET  /facility/:id                     controllers.facility.FacilityController.s
 
 # --[ 予約ページ ]----------------------------------------------------------------
 GET  /reservation/:id                  controllers.reservation.ReservationController.add(id: Long)
+POST /reservation/create               controllers.reservation.ReservationController.create
 
 # --[ その他 ]------------------------------------------------------------------
 GET  /assets/*file  controllers.Assets.versioned(path = "/public", file)

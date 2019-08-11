@@ -6,19 +6,17 @@
  *@
 @import play.api.data.Form
 
-@** 施設/予約 *@
-@import model.site.reservation.SiteViewValueReservationAdd
-@import persistence.reservation.model.ReservationAdd
+@** 施設/予約完了 *@
 
-@(vv: model.component.util.ViewValuePageLayout, form: Form[ReservationAdd])(implicit messages: play.api.i18n.Messages)
+@(vv: model.component.util.ViewValuePageLayout)(implicit messages: play.api.i18n.Messages)
 @views.html.common.layout.Default(vv) {
   @views.html.common.layout.ContentLayout(
-    id      = "site-reservation-add",
+    id      = "site-reservation-create",
     content = tplContent
   )
 }
 
 @** テンプレート: コンテンツ *@
 @tplContent = {
-  @views.html.site.reservation.add._Add(vv,form)
+  @views.html.site.reservation.create._Create(vv)
 }

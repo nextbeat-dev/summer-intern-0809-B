@@ -1,0 +1,22 @@
+@*
+ * This file is part of the Nextbeat services.
+ *
+ * For the full copyright and license information,
+ * please view the LICENSE file that was distributed with this source code.
+ *@
+@import views.html.helper
+@import play.api.data.Form
+
+@(vv: model.component.util.ViewValuePageLayout)(implicit messages: play.api.i18n.Messages)
+
+@** 予約完了画面 *@
+@views.html.common.layout.InnerContent("site-app-new-user-form", "content") {
+  <h3 class="content__section header">
+    <span class="header__title">予約が完了しました</span>
+  </h3>
+  <div class="form__section submit reservation_button">
+    <a href="/facility/list">
+      <button class="button button-stroked" type="submit">一覧ページに戻る</button>
+    </a>
+  </div>
+  }

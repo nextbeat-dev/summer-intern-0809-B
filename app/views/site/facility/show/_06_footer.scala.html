@@ -1,0 +1,11 @@
+@**
+ * 詳細ページ概要
+ *@
+
+@import model.site.facility.SiteViewValueFacilityShow
+@(vv: SiteViewValueFacilityShow)(implicit messages: play.api.i18n.Messages)
+@views.html.common.layout.InnerContent("site-facility-show-footer", "content") {
+  <button class="button button-stroked" type="submit">
+    <a href="@controllers.reservation.routes.ReservationController.add(vv.facility.id.get)">予約画面へ行く</a>
+  </button>
+}
