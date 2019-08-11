@@ -6,12 +6,12 @@
 @(vv: SiteViewValueFacilityShow)(implicit messages: play.api.i18n.Messages)
 @views.html.common.layout.InnerContent("site-facility-show-title", "content") {
   <div class="content">
-    <h1 class="title">Monterey House Point Pinos</h1>
+    <h1 class="title">@vv.facility.name</h1>
     <p>
       <span class="tag">エリア</span>
       <span class="tag-content">@vv.location.namePref</span>
       <span class="tag">価格</span>
-      <span class="tag-content">@vv.facility.cost.toString.reverse.sliding(3, 3).map(_.reverse).toSeq.reverse.mkString(",") 円 / 1名</span>
+      <span class="tag-content">¥ @vv.facility.cost.toString.reverse.sliding(3, 3).map(_.reverse).toSeq.reverse.mkString(",") 〜</span>
       <span class="tag">会議環境</span>
       <span class="tag-content">最大@vv.facility.capacity 名まで</span>
     </p>

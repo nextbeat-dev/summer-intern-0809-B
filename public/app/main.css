@@ -554,6 +554,8 @@ h1, h2, h3, h4, h5, h6 {
     overflow: hidden; }
   #site-facility-show-slide .main-image__content {
     width: 100vw;
+    height: 550px;
+    background-size: cover;
     float: left; }
 
 @keyframes slide {
@@ -584,6 +586,8 @@ h1, h2, h3, h4, h5, h6 {
   display: flex; }
   #site-facility-show-detail .detail__condition {
     margin-right: 30px; }
+  #site-facility-show-detail .detail__calendar {
+    padding-top: 20px; }
   #site-facility-show-detail .detail__copy {
     margin: 20px 0; }
   #site-facility-show-detail .detail__text {
@@ -632,6 +636,25 @@ h1, h2, h3, h4, h5, h6 {
   margin: 20px auto;
   width: 1024px;
   text-align: center; }
+
+.main-content__inner .calendar {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid lightgray; }
+
+.calendar-table {
+  width: 300px;
+  height: 250px;
+  text-align: center; }
+  .calendar-table th {
+    width: 40px; }
+  .calendar-table td {
+    width: 40px;
+    height: 40px; }
+  .calendar-table .today {
+    background-color: lightskyblue; }
+  .calendar-table .ng {
+    background-color: gray; }
 
 .reservation_button {
   margin: 20px auto;

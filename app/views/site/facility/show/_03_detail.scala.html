@@ -20,14 +20,9 @@
         <h3 class="detail__area">エリア：@vv.location.namePref</h3>
         <h3 class="detail__address">住所：@vv.facility.address</h3>
       </div>
-      <div class="detail__calender">
-        <div>
-          @views.html.common.component.image.ResponsiveImage(
-            path    = "site/facility/show/calender.png",
-            alt     = "カレンダー",
-            classes = "visual__image"
-          )
-        </div>
+
+      <div class="detail__calendar">
+        @views.html.site.facility.show._calendar()
       </div>
     </div>
   </div>
