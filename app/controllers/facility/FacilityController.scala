@@ -70,6 +70,7 @@ class FacilityController @javax.inject.Inject()(
         layout     = ViewValuePageLayout(id = request.uri),
         regions    = Region.map.map(_._1),
         capacities = capacitySeq,
+        tags       = tagSeq,
         facilities = facilitySeq
       )
       Ok(views.html.site.facility.list.Main(vv, formForFacilitySearch))
@@ -84,10 +85,12 @@ class FacilityController @javax.inject.Inject()(
       errors => {
        for {
           facilitySeq <- facilityDao.findAll
+          tagSeq      <- tagDao.findAll
         } yield {
           val vv = SiteViewValueFacilityList(
             layout     = ViewValuePageLayout(id = request.uri),
             regions    = Region.map.map(_._1),
+            tags       = tagSeq,
             capacities = capacitySeq,
             facilities = facilitySeq
           )
@@ -97,6 +100,7 @@ class FacilityController @javax.inject.Inject()(
       form   => {
         for {
           locSeq      <- daoLocation.filterByIds(Location.Region.IS_PREF_ALL)
+          tagSeq      <- tagDao.findAll
           facilitySeq <- form.regionIdOpt match {
             case Some(id) =>
               val regionMap = Region.map.toMap[Region, Seq[Location.Id]]
@@ -124,6 +128,7 @@ class FacilityController @javax.inject.Inject()(
             layout     = ViewValuePageLayout(id = request.uri),
             regions    = Region.map.map(_._1),
             capacities = capacitySeq,
+            tags       = tagSeq,
             facilities = facilitySeq
           )
           Ok(views.html.site.facility.list.Main(vv, formForFacilitySearch.fill(form)))
