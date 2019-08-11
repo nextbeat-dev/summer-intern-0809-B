@@ -8,6 +8,7 @@ POST  /app/new-user                     controllers.app.NewUserCommitController.
 
 
 # --[ 施設ページ ]----------------------------------------------------------------
+GET  /                                 controllers.facility.FacilityController.list
 GET  /facility/list                    controllers.facility.FacilityController.list
 GET  /facility/search                  controllers.facility.FacilityController.search
 GET  /facility/show                    controllers.facility.FacilityController.show
@@ -16,10 +17,7 @@ GET  /facility/show                    controllers.facility.FacilityController.s
 # --[ 予約ページ ]----------------------------------------------------------------
 GET  /reservation/:id                  controllers.reservation.ReservationController.add(id: Long)
 
-# --[ 特集ページ ]--------------------------------------------------------------
-GET  /recruit/intership-for-summer-21  controllers.recruit.InternshipForSummer21Controller.view
-
 # --[ その他 ]------------------------------------------------------------------
 GET  /assets/*file  controllers.Assets.versioned(path = "/public", file)
-GET  /              controllers.ApplicationController.redirect(to = "/recruit/intership-for-summer-21", from = "")
-GET  /*path         controllers.ApplicationController.redirect(to = "/recruit/intership-for-summer-21", path: String)
+GET  /              controllers.ApplicationController.redirect(to = "/", from = "")
+GET  /*path         controllers.ApplicationController.redirect(to = "/", path: String)
