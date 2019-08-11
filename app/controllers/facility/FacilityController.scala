@@ -12,8 +12,14 @@ import play.api.mvc.{AbstractController, MessagesControllerComponents}
 import persistence.facility.dao.FacilityDAO
 import persistence.facility.model.Facility
 import persistence.facility.model.Facility.formForFacilitySearch
+
 import persistence.geo.model.Location
 import persistence.geo.dao.LocationDAO
+
+import persistence.tag.dao.TagDAO
+import persistence.tag.model.Tag
+
+
 import model.site.facility.SiteViewValueFacilityList
 import model.site.facility.SiteViewValueFacilityShow
 import model.component.util.ViewValuePageLayout
@@ -27,6 +33,7 @@ import persistence.geo.model.Location.Region
 class FacilityController @javax.inject.Inject()(
   val facilityDao: FacilityDAO,
   val daoLocation: LocationDAO,
+  val tagDao:      TagDAO,
   cc: MessagesControllerComponents
 ) extends AbstractController(cc) with I18nSupport {
   implicit lazy val executionContext = defaultExecutionContext
@@ -38,7 +45,7 @@ class FacilityController @javax.inject.Inject()(
   def show(id: Long) = Action.async { implicit request =>
     for {
       Some(facility) <- facilityDao.get(id)
-      Some(location)    <- daoLocation.get(facility.locationId)
+      Some(location) <- daoLocation.get(facility.locationId)
     } yield {
       val vv = SiteViewValueFacilityShow(
         layout     = ViewValuePageLayout(id = request.uri),
@@ -55,7 +62,9 @@ class FacilityController @javax.inject.Inject()(
   def list = Action async { implicit request =>
     for {
       facilitySeq <- facilityDao.findAll
+      tagSeq      <- tagDao.findAll
     } yield {
+      println(tagSeq)
       val vv = SiteViewValueFacilityList(
         
         layout     = ViewValuePageLayout(id = request.uri),
