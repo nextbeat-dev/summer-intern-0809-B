@@ -10,8 +10,8 @@
 @import model.site.reservation.SiteViewValueReservationAdd
 @import persistence.reservation.model.ReservationAdd
 
-@(vv: SiteViewValueReservationAdd, form: Form[ReservationAdd])(implicit messages: play.api.i18n.Messages)
-@views.html.common.layout.Default(vv.layout) {
+@(vv: model.component.util.ViewValuePageLayout, form: Form[ReservationAdd])(implicit messages: play.api.i18n.Messages)
+@views.html.common.layout.Default(vv) {
   @views.html.common.layout.ContentLayout(
     id      = "site-facility-list",
     content = tplContent
