@@ -586,6 +586,8 @@ h1, h2, h3, h4, h5, h6 {
   display: flex; }
   #site-facility-show-detail .detail__condition {
     margin-right: 30px; }
+  #site-facility-show-detail .detail__calendar {
+    padding-top: 20px; }
   #site-facility-show-detail .detail__copy {
     margin: 20px 0; }
   #site-facility-show-detail .detail__text {
@@ -630,11 +632,12 @@ h1, h2, h3, h4, h5, h6 {
   #site-facility-show-access .content .info {
     margin: 20px auto 20px 0; }
 
-.calendar {
-  margin: 20px; }
+.main-content__inner .calendar {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid lightgray; }
 
 .calendar-table {
-  margin-top: 20px;
   width: 300px;
   height: 250px;
   text-align: center; }
@@ -644,7 +647,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 40px;
     height: 40px; }
   .calendar-table .today {
-    background-color: lightcoral; }
+    background-color: lightskyblue; }
   .calendar-table .ng {
     background-color: gray; }
 
