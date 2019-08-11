@@ -88,7 +88,11 @@
                   style="background-image: url('@((facility.imagePaths split ',')(0))');">
                 </div>
                 <h2 class="name">@facility.name</h2>
-                <p class="cost">¥ @facility.cost.toString.reverse.sliding(3, 3).map(_.reverse).toSeq.reverse.mkString(",")/人</p>
+                <p class="cost">
+                  <span>¥ @facility.cost.toString.reverse.sliding(3, 3).map(_.reverse).toSeq.reverse.mkString(",") 〜</span>
+                  &ensp;/&ensp;
+                  <span>最大 @facility.capacity 人</span>
+                </p>
               </header>
               <section class="facility-item__content">
                 <p class="strong">@facility.catchCopy</p>

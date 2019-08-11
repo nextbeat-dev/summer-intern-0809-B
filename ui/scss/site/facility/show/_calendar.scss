@@ -1,9 +1,12 @@
-.calendar {
-  margin: 20px;
+.main-content__inner {
+  .calendar {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid lightgray;
+  }
 }
 
 .calendar-table {
-  margin-top: 20px;
   width: 300px;
   height: 250px;
   text-align: center;
@@ -18,7 +21,7 @@
   }
 
   .today {
-    background-color: lightcoral;
+    background-color: lightskyblue;
   }
 
   .ng {

@@ -9,7 +9,7 @@
     <div class="main-image__wrapper">
       <div class="main-image">
       @for(imagePath  <- vv.facility.imagePaths.split(",")) {
-        <img class="main-image__content" src=@imagePath>
+        <div class="main-image__content" style="background-image: url('@imagePath')"></div>
       }
       </div>
     </div>
