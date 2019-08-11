@@ -45,7 +45,7 @@ class LocationDAO @javax.inject.Inject()(
   def filterByIds(ids: Seq[Location.Id]): Future[Seq[Location]] =
     db.run {
       slick
-        .filter(_.id inSet ids)
+        .filter { t => (t.id inSet ids) || (t.parent inSet ids) }
         .result
     }
 
@@ -60,6 +60,14 @@ class LocationDAO @javax.inject.Inject()(
         .result
     }
   }
+  def filterByRegion(ids: Seq[Location.Id]): Future[Seq[Location]] = {
+    db.run {
+      slick
+        .filter{t => (t.id inSet ids) || (t.parent inSet ids)} 
+        .result
+   }
+  }
+
 
   // --[ テーブル定義 ] --------------------------------------------------------
   class LocationTable(tag: Tag) extends Table[Location](tag, "geo_location") {
