@@ -17,21 +17,70 @@
     <span class="header__title">予約画面</span>
   </h3>
   <div class="content__section form">
-    @helper.form(action = controllers.facility.routes.FacilityController.list) {
+    @helper.form(action = controllers.reservation.routes.ReservationController.create) {
 
       @** 仮想予約用フォーム *@
       <div class="form__section pref inline">
-        @helper.inputText(form("company_name"),     '_label   -> "会社団体名",      'placeholder -> "会社団体名")
-        @helper.inputText(form("department"),     '_label   -> "部署名",      'placeholder -> "部署名")
-        @helper.inputText(form("name"),     '_label   -> "ご担当者様のお名前",      'placeholder -> "ご担当者様のお名前")
-        @helper.inputText(form("mail_address"),     '_label   -> "メールアドレス",      'placeholder -> "メールアドレス")
-        @helper.inputText(form("phone_number"),     '_label   -> "電話番号",      'placeholder -> "電話番号")
-        @helper.inputText(form("date"),     '_label   -> "日時",      'placeholder -> "日時")
-        @helper.inputText(form("content"),     '_label   -> "お問い合わせ内容",      'placeholder -> "お問い合わせ内容")
+       <div class="form__section name-container">
+         <span class="form__section name">
+          @helper.inputText(
+             form("company_name"),
+             '_label   -> "会社団体名",
+             'placeholder -> "会社団体名")
+         </span>
+       </div>
+       <div class="form__section name-container">
+         <span class="form__section name">
+          @helper.inputText(
+            form("department"),
+            '_label   -> "部署名",
+            'placeholder -> "部署名")
+         </span>
+       </div>
+       <div class="form__section name-container">
+         <span class="form__section name">
+          @helper.inputText(
+             form("name"),
+             '_label   -> "ご担当者様のお名前",
+             'placeholder -> "ご担当者様のお名前")
+         </span>
+       </div>
+       <div class="form__section name-container">
+         <span class="form__section name">
+          @helper.inputText(
+             form("mail_address"),
+             '_label   -> "メールアドレス",
+             'placeholder -> "メールアドレス")
+         </span>
+       </div>
+       <div class="form__section name-container">
+         <span class="form__section name">
+          @helper.inputText(
+             form("phone_number"),
+             '_label   -> "電話番号",
+             'placeholder -> "電話番号")
+        </span>
+       </div>
+       <div class="form__section name-container">
+         <span class="form__section name">
+          @helper.inputText(
+             form("date"),
+             '_label   -> "日時",
+             'placeholder -> "日時")
+         </span>
+       </div>
+       <div class="form__section name-container">
+         <span class="form__section name">
+          @helper.inputText(
+             form("content"),
+             '_label   -> "お問い合わせ内容",
+             'placeholder -> "お問い合わせ内容")
+         </span>
+       </div>
       </div>
       @** 予約ボタン *@
-      <div class="form__section submit inline">
-        <button class="button" type="submit">
+      <div class="form__section submit">
+        <button class="button button-stroked" type="submit">
           <span class="submit__text">予約</span>
         </button>
       </div>

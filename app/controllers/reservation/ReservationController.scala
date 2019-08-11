@@ -32,4 +32,9 @@ class ReservationController @javax.inject.Inject()(
       Ok(views.html.site.reservation.add.Main(vv, formForReservationAdd))
   }
 
+  def create = Action { implicit request =>
+      val vv = ViewValuePageLayout(id = request.uri)
+      Ok(views.html.site.reservation.create.Main(vv))
+  }
+
 }
