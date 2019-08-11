@@ -50,7 +50,6 @@ class FacilityController @javax.inject.Inject()(
     for {
       facilitySeq <- facilityDao.findAll
     } yield {
-      val capacitySeq = List(1,2,3)
       val vv = SiteViewValueFacilityList(
         
         layout     = ViewValuePageLayout(id = request.uri),
