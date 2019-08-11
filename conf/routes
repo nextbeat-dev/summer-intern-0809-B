@@ -7,11 +7,11 @@ GET   /app/new-user                     controllers.app.NewUserController.viewFo
 POST  /app/new-user                     controllers.app.NewUserCommitController.application
 
 
-
 # --[ 施設ページ ]----------------------------------------------------------------
 GET  /facility/list                    controllers.facility.FacilityController.list
 GET  /facility/search                  controllers.facility.FacilityController.search
 GET  /facility/show                    controllers.facility.FacilityController.show
+
 
 # --[ 予約ページ ]----------------------------------------------------------------
 GET  /reservation/:id                  controllers.reservation.ReservationController.add(id: Long)
