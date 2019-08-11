@@ -12,13 +12,10 @@
 @(vv: SiteViewValueFacilityList, form: Form[FacilitySearch])(implicit messages: play.api.i18n.Messages)
 
 @** 施設検索一覧 *@
-@views.html.common.layout.InnerContent("site-app-facility-list-form", "content") {
-  @** --[ 見出し ]---------------------------------------------------------- *@
+
   <h3 class="content__section header">
     <span class="header__title">施設一覧</span>
   </h3>
-
-  @** --[ 検索フォーム ]---------------------------------------------------------- *@
   <div class="content__section form">
     @helper.form(action = controllers.facility.routes.FacilityController.search) {
 
@@ -53,37 +50,27 @@
 
   @** --[ 一覧 ]-------------------------------------------------------- *@
   <div class="content__section content">
-    @for(facility <- vv.facilities) {
-      <article class="facility-list-item">
-        <a href="#">
-          <div class="item-panel__wrapper">
-            <header class="facility-item__header">
-              <div class="name">
-                @facility.name
-              </div>
-            </header>
-            <section class="facility-item__content">
-              <div>
-                <div class="item-panel__content">
-                  <div class="address">
-                    <label class="inline">住所:</label>
-                    <p class="inline">
-                      @facility.address
-                    </p>
-                  </div>
-                  <div class="description">
-                    <label class="inline">備考:</label>
-                    <p class="inline">
-                      @facility.description
-                    </p>
-                  </div>
+    <div class="facility-list__wrapper">
+      @for(facility <- vv.facilities) {
+        <article class="facility-list-item">
+          <a href="#">
+            <div class="item-panel__wrapper">
+              <header class="facility-item__header">
+                <div class="thumbnail"
+                  style="background-image: url('@((facility.imagePaths split ',')(0))');">
                 </div>
-              </div>
-            </section>
-          </div>
-        </a>
-         <a href="../reservation/@facility.id"><span class="submit__text">予約する</span></a>
+                <h2 class="name">@facility.name</h2>
+                <p class="cost">¥@facility.cost/人</p>
+              </header>
+              <section class="facility-item__content">
+                <p class="strong">@facility.catchCopy</p>
+                <p>@facility.description</p>
+              </section>
+            </div>
+          </a>
+          <a href="../reservation/@facility.id"><span class="submit__text">予約する</span></a>
       </article>
+    </div>
     }
   </div>
 }
