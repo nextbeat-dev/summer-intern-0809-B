@@ -13,6 +13,34 @@
 
 @** 施設検索一覧 *@
 
+@views.html.common.layout.InnerContent("site-app-new-user-form", "content") {	
+  <div class="splash__section">	
+    @views.html.common.component.image.ResponsiveImage(	
+      path    = "site/facility/list/logo.png",	
+      alt     = "Retreats VIP",	
+      classes = "splash__logo"	
+    )	
+    @views.html.common.component.image.ResponsiveImage(	
+      path    = "site/facility/list/splash.png",	
+      alt     = "splash photo",	
+      classes = "splash__photo"	
+    )	
+    <div class="splash__copy">	
+      <h2 class="big">	
+          都会の喧騒から離れて、<br>	
+          議論を楽しむ。	
+      </h2>	
+      <p class="small">	
+        いつもの喧騒を抜け出して、<br>	
+        雄大な自然の中でゆったりと議論する。<br>	
+        Retreats VIPはリゾートミーティングに必要なすべてのものと<br>	
+        会話を弾ませる素晴らしい空間を提供します。	
+      </p>	
+    </div>	
+  </div>	
+
+
+   @** --[ 検索フォーム ]---------------------------------------------------------- *@
   <h3 class="content__section header">
     <span class="header__title">施設一覧</span>
   </h3>
