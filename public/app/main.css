@@ -628,6 +628,15 @@ h1, h2, h3, h4, h5, h6 {
   #site-facility-show-access .content .info {
     margin: 20px auto 20px 0; }
 
+#site-facility-show-footer {
+  margin: 20px auto;
+  width: 1024px;
+  text-align: center; }
+
+.reservation_button {
+  margin: 20px auto;
+  text-align: center; }
+
 #site-recruit-internship-for-summer-21-main-visual.content {
   height: 660px;
   position: relative;
