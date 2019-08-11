@@ -35,7 +35,7 @@ case class Facility(
 // 施設検索
 case class FacilitySearch(
   regionIdOpt: Option[Short],
-  capacityOpt: Option[Short]
+  capacityOpt: Option[Int]
 )
 
 // コンパニオンオブジェクト
@@ -50,7 +50,7 @@ object Facility {
     mapping(
       "regionCode" -> optional(shortNumber)
         .verifying("regionCode is invalid.", value => if (value.isDefined) (value.get >= 1 && value.get <= 8 ) else true),
-      "capacities" -> optional(shortNumber)
+      "capacities" -> optional(number)
         .verifying("capacity is invalid.", value=> if (value.isDefined) (value.get >= 1 && value.get <= 100) else true),
     )(FacilitySearch.apply)(FacilitySearch.unapply)
   )

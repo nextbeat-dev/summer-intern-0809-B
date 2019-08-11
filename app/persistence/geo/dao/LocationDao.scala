@@ -61,12 +61,9 @@ class LocationDAO @javax.inject.Inject()(
     }
   }
   def filterByRegion(ids: Seq[Location.Id]): Future[Seq[Location]] = {
-    println("#"*20)
-    println(ids)
-    println("#"*20)
     db.run {
       slick
-        .filter(_.parent inSet ids)
+        .filter{t => (t.id inSet ids) || (t.parent inSet ids)} 
         .result
    }
   }

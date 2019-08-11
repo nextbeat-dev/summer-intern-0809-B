@@ -90,10 +90,8 @@ class FacilityController @javax.inject.Inject()(
                 locations   <- daoLocation.filterByRegion(regionMap(Region(id)))
                 facilitySeq <- facilityDao.filterByLocationIds(locations.map(_.id))
               } yield {
-                println(form.capacityOpt)
-                println(facilitySeq)
                 form.capacityOpt match {
-                  case Some(capacity) => facilitySeq.filter(_.capacity > capacity)
+                  case Some(capacity) => facilitySeq.filter(_.capacity >= capacity)
                   case None => facilitySeq
                 }
               }
@@ -102,7 +100,7 @@ class FacilityController @javax.inject.Inject()(
               facilitySeq <- facilityDao.findAll
             } yield {
                 form.capacityOpt match {
-                  case Some(capacity) => facilitySeq.filter(_.capacity > capacity)
+                  case Some(capacity) => facilitySeq.filter(_.capacity >= capacity)
                   case None => facilitySeq
               }
             }
