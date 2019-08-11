@@ -44,6 +44,7 @@
   <h3 class="content__section header">
     <span class="header__title">施設一覧</span>
   </h3>
+
   <div class="content__section form">
     @helper.form(action = controllers.facility.routes.FacilityController.search) {
 
@@ -97,8 +98,8 @@
             </div>
           </a>
           <a href="../reservation/@facility.id"><span class="submit__text">予約する</span></a>
-      </article>
+        </article>
+      }
     </div>
-    }
   </div>
 }
