@@ -554,8 +554,9 @@ h1, h2, h3, h4, h5, h6 {
     overflow: hidden; }
   #site-facility-show-slide .main-image__content {
     width: 100vw;
-    height: 550px;
+    height: 400px;
     background-size: cover;
+    background-position: center;
     float: left; }
 
 @keyframes slide {
