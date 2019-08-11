@@ -70,7 +70,7 @@
       @** こだわり *@
       <div class="form__section pref inline">
         @helper.select(
-          field   = form("tags"),
+          field   = form("tagCode"),
           options = vv.tags.map(v => (v.id.get.toString,v.name)),
           '_label           -> "こだわり",
           '_default         -> "未選択",
