@@ -37,10 +37,4 @@ object Tag {
   // --[ 管理ID ]---------------------------------------------------------------
   type Id = Long
 
-  // --[ フォーム定義 ]---------------------------------------------------------
-  val formForTagSearch = Form(
-    mapping(
-      "tagIdOpt" -> optional(longNumber),
-    )(TagSearch.apply)(TagSearch.unapply)
-  )
 }

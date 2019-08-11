@@ -64,7 +64,6 @@ class FacilityController @javax.inject.Inject()(
       facilitySeq <- facilityDao.findAll
       tagSeq      <- tagDao.findAll
     } yield {
-      println(tagSeq)
       val vv = SiteViewValueFacilityList(
         
         layout     = ViewValuePageLayout(id = request.uri),
