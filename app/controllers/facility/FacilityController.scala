@@ -33,13 +33,13 @@ class FacilityController @javax.inject.Inject()(
    */
   def show(id: Long) = Action.async { implicit request =>
     for {
-      facilityOp  <- facilityDao.get(id)
-      locOp      <- daoLocation.get(facilityOp.get.locationId)
+      Some(facility) <- facilityDao.get(id)
+      Some(location)    <- daoLocation.get(facility.locationId)
     } yield {
       val vv = SiteViewValueFacilityShow(
         layout     = ViewValuePageLayout(id = request.uri),
-        location   = locOp,
-        facility   = facilityOp
+        location   = location,
+        facility   = facility
       )
       Ok(views.html.site.facility.show.Main(vv))
     }

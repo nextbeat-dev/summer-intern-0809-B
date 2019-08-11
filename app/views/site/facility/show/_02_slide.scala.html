@@ -8,8 +8,8 @@
   <div class="content full-width">
     <div class="main-image__wrapper">
       <div class="main-image">
-      @for(facility <- vv.facility.get.imagePaths.split(",")) {
-        <img class="main-image__content" src=@facility>
+      @for(imagePath  <- vv.facility.imagePaths.split(",")) {
+        <img class="main-image__content" src=@imagePath>
       }
       </div>
     </div>

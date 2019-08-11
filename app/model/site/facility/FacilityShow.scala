@@ -15,6 +15,6 @@ import persistence.facility.model.Facility
 //~~~~~~~~~~~~~~~~~~~~~
 case class SiteViewValueFacilityShow(
   layout:   ViewValuePageLayout,
-  location: Option[Location],
-  facility: Option[Facility]
+  location: Location,
+  facility: Facility
 )
