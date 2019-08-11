@@ -628,6 +628,24 @@ h1, h2, h3, h4, h5, h6 {
   #site-facility-show-access .content .info {
     margin: 20px auto 20px 0; }
 
+.calendar {
+  margin: 20px; }
+
+.calendar-table {
+  margin-top: 20px;
+  width: 300px;
+  height: 250px;
+  text-align: center; }
+  .calendar-table th {
+    width: 40px; }
+  .calendar-table td {
+    width: 40px;
+    height: 40px; }
+  .calendar-table .today {
+    background-color: lightcoral; }
+  .calendar-table .ng {
+    background-color: gray; }
+
 #site-recruit-internship-for-summer-21-main-visual.content {
   height: 660px;
   position: relative;
