@@ -11,12 +11,13 @@ import model.component.util.ViewValuePageLayout
 import persistence.geo.model.Location
 import persistence.facility.model.Facility
 import persistence.geo.model.Location.Region
-
+import persistence.tag.model.Tag
 // 表示: 施設一覧
 //~~~~~~~~~~~~~~~~~~~~~
 case class SiteViewValueFacilityList(
   layout:   ViewValuePageLayout,
   regions:    Seq[Region],
   capacities: Seq[Int],
+  tags      : Seq[Tag],
   facilities: Seq[Facility]
 )

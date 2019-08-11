@@ -67,6 +67,16 @@
           '_showConstraints -> false
         )
       </div>
+      @** こだわり *@
+      <div class="form__section pref inline">
+        @helper.select(
+          field   = form("tagCode"),
+          options = vv.tags.map(v => (v.id.get.toString,v.name)),
+          '_label           -> "こだわり",
+          '_default         -> "未選択",
+          '_showConstraints -> false
+        )
+      </div>
       @** 登録ボタン *@
       <div class="form__section submit inline">
         <button class="button" type="submit">
