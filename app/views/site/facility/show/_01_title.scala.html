@@ -11,7 +11,7 @@
       <span class="tag">エリア</span>
       <span class="tag-content">@vv.location.namePref</span>
       <span class="tag">価格</span>
-      <span class="tag-content">@vv.facility.cost 円 / 1名</span>
+      <span class="tag-content">@vv.facility.cost.toString.reverse.sliding(3, 3).map(_.reverse).toSeq.reverse.mkString(",") 円 / 1名</span>
       <span class="tag">会議環境</span>
       <span class="tag-content">最大@vv.facility.capacity 名まで</span>
     </p>
