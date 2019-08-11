@@ -45,7 +45,7 @@
   <div class="content__section content">
     @for(facility <- vv.facilities) {
       <article class="facility-list-item">
-        <a href="../facility/@facility.id">
+        <a href="@controllers.facility.routes.FacilityController.show(facility.id.get)">
           <div class="item-panel__wrapper">
             <header class="facility-item__header">
               <div class="name">
@@ -72,7 +72,7 @@
             </section>
           </div>
         </a>
-         <a href="@controllers.facility.routes.FacilityController.show(facility.id.get)"><span class="submit__text">予約する</span></a>
+         <a href="../reservation/@facility.id"><span class="submit__text">予約する</span></a>
       </article>
     }
   </div>
