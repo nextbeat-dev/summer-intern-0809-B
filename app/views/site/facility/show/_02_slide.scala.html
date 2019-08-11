@@ -1,14 +1,16 @@
 @**
  * 詳細ページ概要
  *@
+
+@import model.site.facility.SiteViewValueFacilityShow
+@(vv: SiteViewValueFacilityShow)(implicit messages: play.api.i18n.Messages)
 @views.html.common.layout.InnerContent("site-facility-show-slide", "content") {
   <div class="content full-width">
     <div class="main-image__wrapper">
       <div class="main-image">
-        <img class="main-image__content" src="https://www.img-ikyu.com/contents/dg/guide/acc0/00001290/img/a_sr_01.jpg">
-        <img class="main-image__content" src="https://www.img-ikyu.com/contents/dg/guide/acc0/00001290/img/a_sr_02.jpg">
-        <img class="main-image__content" src="https://www.img-ikyu.com/contents/dg/guide/acc0/00001290/img/a_sr_03.jpg">
-        <img class="main-image__content" src="https://www.img-ikyu.com/contents/dg/guide/acc0/00001290/img/a_sr_05.jpg">
+      @for(facility <- vv.facility.get.imagePaths.split(",")) {
+        <img class="main-image__content" src=@facility>
+      }
       </div>
     </div>
   </div>

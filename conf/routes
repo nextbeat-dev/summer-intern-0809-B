@@ -11,7 +11,7 @@ POST  /app/new-user                     controllers.app.NewUserCommitController.
 # --[ 施設ページ ]----------------------------------------------------------------
 GET  /facility/list                    controllers.facility.FacilityController.list
 GET  /facility/search                  controllers.facility.FacilityController.search
-GET  /facility/:id                   controllers.facility.FacilityController.show(id: Long)
+GET  /facility/:id                     controllers.facility.FacilityController.show(id: Long)
 
 # --[ 予約ページ ]----------------------------------------------------------------
 GET  /reservation/:id                  controllers.reservation.ReservationController.add(id: Long)

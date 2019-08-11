@@ -1,6 +1,9 @@
 @**
  * 詳細ページ概要
  *@
+
+@import model.site.facility.SiteViewValueFacilityShow
+@(vv: SiteViewValueFacilityShow)(implicit messages: play.api.i18n.Messages)
 @views.html.common.layout.InnerContent("site-facility-show-detail", "content") {
   <div class="content">
     <div class="detail">
@@ -10,17 +13,12 @@
           <span class="tag big">ゴルフ場</span>
           <span class="tag big">ペット可</span>
         </p>
-        <h2 class="detail__copy">ここにしかない時間が流れる至極のひととき。</h2>
+        <h2 class="detail__copy">@vv.facility.get.catchCopy</h2>
         <p class="detail__description">
-          「THE HOUSE」に続く、2つめの施設「THE HOUSE on the beach」は高級プライベートレンタル邸宅です。
-          葉山でも屈指の水の透明度を誇る、真名瀬のビーチに立つ3階建ての邸宅は、ギリシャ・サントリーニ島にあるような建物を思わせる外観です。
-          窓の向こうに広がる太平洋。
-          そして、よく晴れた日には富士山を望むことができます。
-          五感を研ぎ澄ませ、自然と戯れる。
-          ここMonterey House Point Pinosには、ホテルや旅館で味わえない特別な時間が流れています。
+          @vv.facility.get.description
         </p>
-        <h3 class="detail__area">エリア：東京</h3>
-        <h3 class="detail__address">住所：横須賀市湘南国際村1-2-6</h3>
+        <h3 class="detail__area">エリア：@vv.location.get.namePref</h3>
+        <h3 class="detail__address">住所：@vv.facility.get.address</h3>
       </div>
       <div class="detail__calender">
         <div>
