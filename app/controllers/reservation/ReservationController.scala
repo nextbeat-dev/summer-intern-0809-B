@@ -11,7 +11,6 @@ import play.api.i18n.I18nSupport
 import play.api.mvc.{AbstractController, MessagesControllerComponents}
 import persistence.reservation.dao.ReservationDAO
 import persistence.reservation.model.Reservation.formForReservationAdd
-import model.site.reservation.SiteViewValueReservationAdd
 import model.component.util.ViewValuePageLayout
 import persistence.facility.dao.FacilityDAO
 
@@ -28,16 +27,9 @@ class ReservationController @javax.inject.Inject()(
   /**
     * 施設予約ページ
     */
-  def add(id: Long) = Action.async { implicit request =>
-      for {
-      facilitySeq <- daoFacility.get(id)
-      } yield {
-      val vv = SiteViewValueReservationAdd(
-        layout     = ViewValuePageLayout(id = request.uri),
-        facilities = facilitySeq
-      )
+  def add(id: Long) = Action { implicit request =>
+      val vv = ViewValuePageLayout(id = request.uri)
       Ok(views.html.site.reservation.add.Main(vv, formForReservationAdd))
-    }
   }
 
 }
