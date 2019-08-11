@@ -7,6 +7,56 @@
 
 #site-facility-list {
   //-- [ レイアウト ] ----------------------------------------------------------
+  .splash {
+    &__section {
+      margin: 0px auto;
+      padding: 20px 0;
+      position: relative;
+      width: 1024px;
+      height: 80vh;
+    }
+
+    &__logo {
+      position: absolute;
+      width: 25%;
+      top: 3rem;
+      left: 0;
+    }
+
+    &__photo {
+      position: absolute;
+      width: 50%;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      margin: auto 0;
+    }
+
+    &__copy{
+      position: absolute;
+      margin: auto;
+      height: 5rem;
+      left: 2rem;
+      top: 0;
+      bottom: 0;
+
+      .big {
+        font-size: 4rem;
+        line-height: 6rem;
+        letter-spacing: 1rem;
+      }
+  
+      .small {
+        color: gray;
+        margin-top: 1rem;
+        font-size: 1rem;
+        font-family: serif;
+        line-height: 3rem;
+        letter-spacing: 0.15rem;
+      }
+    }
+  }
+
   .content__section {
     .inline {
       display: inline-block;
@@ -27,40 +77,57 @@
       width: 1024px;
       margin: auto;
 
+      .facility-list__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
       //-- [ 要素定義 ] ------------------------------------------------------------
       //- 施設
       article {
-        margin:        0 auto;
+        margin:        0 10px;
         margin-bottom: 16px;
         cursor:        pointer;
         background:    #fff;
         border-radius: 4px;
-        box-shadow:    0 1px 2px 0 hsla(0,0%,78%,.5);
+        box-shadow:    0 3px 5px 0 hsla(0,0%,50%,.5);
         position:      relative;
-        width:         650px;
+        width:         320px;
 
         .item-panel__wrapper {
           padding: 16px;
 
-          .facility-item__header {
-            font-weight: bold;
-            font-size:   $font-size-medium;
-            border-bottom: 1px solid lightgray;
+          .facility-item {
+            &__header {
+              font-weight: bold;
+              font-size: $font-size-medium;
+              border-bottom: 1px solid lightgray;
 
-            .thumbnail{
-              width: auto;
-              margin: -16px -16px 10px;
-              height: 200px;
-              background-size: cover;
-              border-radius: 4px 4px 0 0;
+              .name {
+                font-size: 1.5rem;
+              }
+
+              .cost {
+                font-size: 1rem;
+                font-weight: bold;
+                color: darkcyan;
+              }
+
+              .thumbnail{
+                width: auto;
+                margin: -16px -16px 10px;
+                height: 200px;
+                background-size: cover;
+                border-radius: 4px 4px 0 0;
+              }
             }
-          }
 
-          .facility-item__content {
-            margin-top: 10px;
-            label {
-              font-weight:  bold;
-              margin-right: 5px;
+            &__content {
+              margin-top: 10px;
+
+              .strong {
+                font-weight: bold;
+              }
             }
           }
         }
