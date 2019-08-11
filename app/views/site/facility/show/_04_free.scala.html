@@ -1,10 +1,12 @@
 @**
  * 詳細ページ概要
  *@
+
+@import model.site.facility.SiteViewValueFacilityShow
+@(vv: SiteViewValueFacilityShow)(implicit messages: play.api.i18n.Messages)
 @views.html.common.layout.InnerContent("site-facility-show-free", "content") {
   <div class="content">
     <!-- ここにフリーHTMLが入る -->
-    <h2>宿紹介</h2>
-    <iframe width="1024" height="315" src="https://www.youtube.com/embed/_E3IdfCTPkw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    @Html(vv.facility.contents)
   </div>
 }

@@ -7,7 +7,6 @@
 @import views.html.helper
 @import model.site.facility.SiteViewValueFacilityList
 @import play.api.data.Form
-
 @import persistence.facility.model.FacilitySearch
 @(vv: SiteViewValueFacilityList, form: Form[FacilitySearch])(implicit messages: play.api.i18n.Messages)
 
@@ -82,7 +81,7 @@
     <div class="facility-list__wrapper">
       @for(facility <- vv.facilities) {
         <article class="facility-list-item">
-          <a href="#">
+          <a href="@controllers.facility.routes.FacilityController.show(facility.id.get)">
             <div class="item-panel__wrapper">
               <header class="facility-item__header">
                 <div class="thumbnail"
@@ -97,7 +96,6 @@
               </section>
             </div>
           </a>
-          <a href="../reservation/@facility.id"><span class="submit__text">予約する</span></a>
         </article>
       }
     </div>

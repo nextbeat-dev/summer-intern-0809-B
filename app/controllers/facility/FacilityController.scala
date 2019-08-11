@@ -15,6 +15,7 @@ import persistence.facility.model.Facility.formForFacilitySearch
 import persistence.geo.model.Location
 import persistence.geo.dao.LocationDAO
 import model.site.facility.SiteViewValueFacilityList
+import model.site.facility.SiteViewValueFacilityShow
 import model.component.util.ViewValuePageLayout
 import mvc.action.AuthenticationAction
 import persistence.geo.model.Location.Region
@@ -34,12 +35,17 @@ class FacilityController @javax.inject.Inject()(
   /**
    * 施設詳細ページサンプル
    */
-  def show() = Action.async { implicit request =>
+  def show(id: Long) = Action.async { implicit request =>
     for {
-      facility <- facilityDao.get(1)
+      Some(facility) <- facilityDao.get(id)
+      Some(location)    <- daoLocation.get(facility.locationId)
     } yield {
-      val vv = ViewValuePageLayout(id = request.uri)
-      Ok(views.html.site.facility.show.Main(vv, facility.get))
+      val vv = SiteViewValueFacilityShow(
+        layout     = ViewValuePageLayout(id = request.uri),
+        location   = location,
+        facility   = facility
+      )
+      Ok(views.html.site.facility.show.Main(vv))
     }
   }
 
